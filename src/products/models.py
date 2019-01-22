@@ -19,8 +19,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('products:product_category',args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('products:list_category',args=[self.slug])
 
 
 
@@ -63,8 +63,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return reverse('products:product_detail',args=[self.id, self.slug])
+    def get_absolute_url(self):
+        return reverse('products:product_detail',args=[self.slug])
+        # return reverse('products:product_detail',args=[self.id, self.slug])
      
     def sale_price(self):
         if self.old_price > self.price:
@@ -72,5 +73,6 @@ class Product(models.Model):
         else:
             return None
 
-    
+
+   
 
