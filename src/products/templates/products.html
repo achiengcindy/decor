@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block site_wrapper %}
+<div id="main">
+    <header>{% include 'tags/navigation.html' %}</header>
+    <main>
+        <div class="row">
+            <div class="main">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <aside>{% include "tags/category_list.html" %}</aside>
+        </div>
+    </main>
+    <footer></footer>
+</div>
+{% endblock %}

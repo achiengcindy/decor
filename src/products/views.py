@@ -4,10 +4,10 @@ from .models import Category, Product
 
 def product_list(request):
     page_title = 'Decor Products'
-    products = Product.active.all()
+    #products = Product.active.all()
     bestseller = Product.objects.filter(is_bestseller=True)
     # featured = Product.featured.all()
-    return render(request,'product/list.html',{ 'products': products, 'featured':featured, 'bestseller':bestseller})
+    return render(request,'product/list.html',{  'bestseller':bestseller})
 
 
 def list_category(request, slug):
@@ -27,6 +27,5 @@ def product_detail(request, slug):
     meta_keywords = p.meta_keywords
     meta_description = p.meta_description
     return render(request, "product/detail.html", {'c':c, 'p':p})
-
 
 
