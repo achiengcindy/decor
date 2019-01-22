@@ -1,0 +1,37 @@
+
+#ignore all Python files
+*.pyc
+*.log
+settings.py
+db.sqlite3
+.DS_Store
+
+
+# Distribution / packaging
+build/
+dist/
+
+
+# Environments
+.env
+src/decor/settings.py
+
+
+
+src/dump\.json
+
+src/dump1\.json
+
+src/staticfiles/
+
+src/static/css/
+
+src/payment/mpesa\.py
+
+src/payment/token\.py
+
+src/orders/migrations/
+
+*.sql
+
+
