@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from products.models import Product
@@ -29,3 +30,8 @@ def cart_detail(request):
     return render(request, 'cart/detail.html', {'cart': cart}
 
 
+=======
+from django.shortcuts import render
+
+# Create your views here.
+>>>>>>> master
