@@ -1,6 +1,6 @@
 
 {% extends "base.html" %}
-{% load products_filters %}
+{% load products_tags %}
 {% block site_wrapper %}
 <div id="main">
     <header>{% include 'tags/navigation.html' %}
@@ -27,7 +27,9 @@
             <aside>{% category_list request.path %}</aside>
         </div>
     </main>
-    <footer></footer>
+    <footer>
+            {% footer_links %}
+    </footer>
 </div>
 {% endblock %}
 
