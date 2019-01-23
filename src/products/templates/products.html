@@ -1,4 +1,6 @@
+
 {% extends "base.html" %}
+{% load products_filters %}
 {% block site_wrapper %}
 <div id="main">
     <header>{% include 'tags/navigation.html' %}
@@ -15,31 +17,17 @@
                     {% endif %}
                     {% endwith %}
                     </div>
-
-                    <table summary="Your Shopping Cart" id="shopping_cart">
-                            <caption>Your Shopping Cart</caption>
-                            <thead>
-                            <!-- header info here -->
-                            <th scope="col">Product</th>
-                            <!-- ...etc... -->
-                            </thead>
-                            <tfoot>
-                            <!-- footer info here -->
-                            </tfoot>
-                            <tbody>
-                            <! - - loop through cart items here -->
-                            </tbody>
-                            </table>
-    </header>
+</header>
     <main>
         <div class="row">
             <div class="main">
                 {% block content %}
                 {% endblock %}
             </div>
-            <aside>{% include "tags/category_list.html" %}</aside>
+            <aside>{% category_list request.path %}</aside>
         </div>
     </main>
     <footer></footer>
 </div>
 {% endblock %}
+

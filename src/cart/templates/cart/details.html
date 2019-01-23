@@ -1,3 +1,10 @@
+
+{% extends "product.html" %}
+{% load products_filters %}
+{% load catalog_filters %}
+{% block content %}
+
+
 <table class="cart">
     <thead>
         <tr>
@@ -51,3 +58,5 @@
             light">Continue shopping</a>
             <a href="#" class="button">Checkout</a>
             </p>
+
+            {% endblock %}
