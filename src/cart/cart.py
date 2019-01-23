@@ -4,17 +4,16 @@ from products.models import Product
 
 class Cart(object):
     def __init__(self, request):
-    """
-    Initialize the cart.
-    """
-    self.session = request.session
-    cart = self.session.get(settings.CART_SESSION_ID)
-    if not cart:
-        # save an empty cart in the session
-        cart = self.session[settings.CART_SESSION_ID] = {}
-        self.cart = cart
+        """
+        Initialize the cart.
+        """
+        self.session = request.session
+        cart = self.session.get(settings.CART_SESSION_ID)
+        if not cart:
+            # save an empty cart in the session
+            cart = self.session[settings.CART_SESSION_ID] = {}
+            self.cart = cart
 
-<<<<<<< HEAD
     # total number of items in cart
     def __len__(self):
         """
@@ -37,11 +36,8 @@ class Cart(object):
             item['total_price'] = item['price'] * item['quantity']
             yield item
 
-
-=======
->>>>>>> master
     """ add products to cart or update quantities """
-    def add(self, product, quantity=1, update_quantity=False, date):
+    def add(self, product, quantity=1, update_quantity=False ):
         """ convert the product id into a string because 
         Django uses JSON to serialize session data, 
         and JSON only allows string key names """
@@ -54,7 +50,6 @@ class Cart(object):
             self.cart[product_id]['quantity'] += quantity
         self.save()
 
-<<<<<<< HEAD
     
     def remove(self, product):
         """
@@ -65,21 +60,18 @@ class Cart(object):
             del self.cart[product_id]
         self.save()
 
-=======
->>>>>>> master
+
     def save(self):
         # update the session cart
         self.session[settings.CART_SESSION_ID] = self.cart
         # mark the session as "modified" to make sure it is saved
         self.session.modified = True
 
-
-<<<<<<< HEAD
     """ clear session """
     def clear(self):
         # remove cart from session
         del self.session[settings.CART_SESSION_ID]
-    self.session.modified = True
+        self.session.modified = True
 
 
     """ calculate total cost """
@@ -90,14 +82,3 @@ class Cart(object):
 
 
 
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> master

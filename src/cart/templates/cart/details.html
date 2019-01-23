@@ -1,0 +1,53 @@
+<table class="cart">
+    <thead>
+        <tr>
+            <th class="product-remove">Remove</th>
+            <th class="product-thumbnail">Image</th>
+            <th class="product-name">Product</th>
+            <th class="product-price">Unit Price</th>
+            <th class="product-quantity">Quantity</th>
+            <th class="product-subtotal">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for item in cart %}
+            {% with product=item.product %}
+            <tr class="cart_item">
+            <td class="product-thumbnail">
+            <a href="{{ product.get_absolute_url }}"> 
+            <img src="{% if product.image %}{{ product.image.url }}
+            {% else %}{% static "img/no_image.png" %}{% endif %}">
+            </a>
+            </td>
+            <td>{{ product.name }}</td>
+            <td class="product-quantity" data-title="Quantity">
+                    <form class="quantity" action="{% url 'cart:cart_add' p.slug %}" method="post">
+                            {% csrf_token %}
+                            {{ item.update_quantity_form.quantity }}
+                            {{ item.update_quantity_form.update }}
+                            <input type="submit" value="Update">
+                    </form>
+            </td>
+            <td class="product-price">${{ item.price }}</td>
+            <td class="product-subtotal" data-title="Total">${{ item.total_price }}</td>
+            </tr>
+            {% endwith %}
+            {% endfor %}
+        
+                <tr>
+                        <td colspan="6">
+                            <form action="{% url 'coupons:apply' %}" method="post" class="coupon">
+                                {% csrf_token %}
+                                {{ coupon_apply_form.as_p }}
+                                <button type="submit" class="button coupon">Apply</button>
+                            </form>
+                        </td> 
+                </tr>
+    </tbody>
+    </table>
+
+    <p class="text-right">
+            <a href="{% url "shop:product_list" %}" class="button
+            light">Continue shopping</a>
+            <a href="#" class="button">Checkout</a>
+            </p>

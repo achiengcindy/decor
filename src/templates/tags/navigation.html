@@ -1,7 +1,14 @@
 <nav>
+        {% url 'product_list' as Shop %}
+        {% url 'product_list' as Shop %}
+       
     <a href="">Rechel</a>
-    <a href="">zprisol</a>
+    <a href="">prisol</a>
     <a href="">Ox</a>
     <a href="">Hates</a>
     <a href="">Programming</a>
+    <a {% if request.path == 'shop' %}  <a {% if request.path == 'shop' %} class="active" {% endif %} href="{% url 'shop:product_list' %}">Shop</a> {% endif %} href="{% url 'products:product_list' %}">Shop</a>
 </nav>
+
+
+
