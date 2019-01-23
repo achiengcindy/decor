@@ -29,3 +29,5 @@ def product_detail(request, slug):
     return render(request, "product/detail.html", {'c':c, 'p':p})
 
 
+
+
