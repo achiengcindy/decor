@@ -4,10 +4,13 @@ from .models import Category, Product
 
 def product_list(request):
     page_title = 'Decor Products'
-    #products = Product.active.all()
+    #default object manager
+    #products = Product.objects.filter(is_active=True)
+    #customized actve manager
+    products = Product.active.all()
     bestseller = Product.objects.filter(is_bestseller=True)
     # featured = Product.featured.all()
-    return render(request,'product/list.html',{  'bestseller':bestseller})
+    return render(request,'product/list.html',{ 'p': products, 'bestseller':bestseller})
 
 
 def list_category(request, slug):
