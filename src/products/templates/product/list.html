@@ -1,4 +1,8 @@
 {% extends "products.html" %}
+{% load products_tags %}
 {% block content %}
 <h1>Welcome to Decor pot shop!</h1>
+
+{% product_list featured 'Featured Products' %}
+{% product_list bestseller 'bestseller' %}
 {% endblock %}

@@ -1,5 +1,6 @@
 
 {% extends "base.html" %}
+{% load search_tags %}
 {% load products_tags %}
 {% block site_wrapper %}
 <div id="main">
@@ -24,7 +25,10 @@
                 {% block content %}
                 {% endblock %}
             </div>
-            <aside>{% category_list request.path %}</aside>
+            <aside>{% category_list request.path %}
+                    {% search_box request %}
+                
+            </aside>
         </div>
     </main>
     <footer>
