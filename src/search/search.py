@@ -23,6 +23,7 @@ def products(search_text):
     products = Product.active.all()
     results = {}
     results['products'] = []
+    
     # iterate through keywords
     for word in words:
         products = products.filter(Q(name__icontains=word) |
@@ -31,7 +32,7 @@ def products(search_text):
         Q(brand__icontains=word) |
         Q(meta_description__icontains=word) |
         Q(meta_keywords__icontains=word))
-        results[‘products’] = products
+        results['products'] = products
     return results
 
 # strip out common words, limit to 5 words
