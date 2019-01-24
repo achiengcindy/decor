@@ -23,6 +23,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('', include('products.urls' , namespace='products')),
     path('pages/', include('django.contrib.flatpages.urls')),
+    path('Search/', include('search.urls')),
 ]
 
 if settings.DEBUG:
