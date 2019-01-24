@@ -35,6 +35,9 @@ class Category(models.Model):
 class ActiveProductManager(models.Manager):
     def get_query_set(self):
         return super(ActiveProductManager, self).get_query_set().filter(is_active=True)
+class FeaturedProductManager(models.Manager):
+    def all(self):
+        return super(FeaturedProductManager, self).all().filter(is_active=True).filter(is_featured=True)
 
 class Product(models.Model):
     """ model class containing information about a product; instances of this class are what the user
@@ -60,9 +63,11 @@ class Product(models.Model):
     meta_description = models.CharField(max_length=255, help_text='Content for description meta tag')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    categories = models.ManyToManyField(Category, related_name='products')
+    categories = models.ManyToManyField(Category)
+
     objects = models.Manager()
     active = ActiveProductManager()
+    featured = FeaturedProductManager()
 
     class Meta:
         db_table = 'products'
