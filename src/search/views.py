@@ -29,5 +29,5 @@ def results(request):
     search.store(request, q)
     
     page_title = 'Search Results for: ' + q
-    return render(request,"search/results.html")
+    return render(request,"search/results.html", {})
 
