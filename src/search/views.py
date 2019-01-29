@@ -5,8 +5,7 @@ import json
 from django.http import HttpResponse
 from django.core import serializers
 from products.models import Product
-from search.search import *
-
+from search import search
 
 
 def results(request):

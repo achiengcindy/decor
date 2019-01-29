@@ -3,8 +3,13 @@
 {% load search_tags %}
 {% load products_tags %}
 {% block site_wrapper %}
-<div id="main">
-    <header>{% include 'tags/navigation.html' %}
+
+<header id="main-header">
+<a class="header__logo" href="/">Cindy<span style="color: yellowgreen;">Achieng</span></a>
+<form>
+<input type="search" name="query" aria-label="Search"></form>
+        
+{% include 'tags/navigation.html' %}
             <div class="cart">
                     {% with total_items=cart|length %}
                     {% if cart|length > 0 %}
@@ -19,7 +24,7 @@
                     {% endwith %}
                     </div>
 </header>
-    <main>
+    <main id="main">
         <div class="row">
             <div class="main">
                 {% block content %}
