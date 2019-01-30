@@ -5,8 +5,8 @@
     {% include 'tags/metatags.html' %}
     <title>{% block title %}{% if page_title %}{{ page_title }} - {% endif %} 
             {{ site_name }}{% endblock %}</title>
-   
-    <link rel="Stylesheet" type="text/css" href="{{ MEDIA_URL }}css/styles.css" />
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="SHORTCUT ICON" href="{{ MEDIA_URL }}images/favicon.ico" />
 </head>
 <body>
