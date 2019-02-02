@@ -78,8 +78,8 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('products:product_detail',args=[self.slug])
-        # return reverse('products:product_detail',args=[self.id, self.slug])
+        #return reverse('products:product_detail',args=[self.slug])
+        return reverse('products:product_detail',args=[self.id, self.slug])
      
     def sale_price(self):
         if self.old_price > self.price:

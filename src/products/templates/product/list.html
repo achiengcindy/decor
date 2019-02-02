@@ -1,8 +1,26 @@
 {% extends "products.html" %}
 {% load products_tags %}
+{% load search_tags %}
+{% load products_filters %}
 {% block content %}
-<h1>Welcome to Decor pot shop!</h1>
 
-{% product_list featured 'Featured Products' %}
-{% product_list bestseller 'bestseller' %}
-{% endblock %}
+<h1>Welcome to Decor pot shop!</h1>
+<div class="container topspace">
+    <div class="row">
+        <aside class="aside">
+            {% category_list request.path %}
+            {% search_box request %}
+        </aside>
+        <div class="products-new">
+            {% product_list recently_viewed 'Your Recently Viewed' %}
+            {% product_list view_recs 'Similar Products' %}
+            {% product_list featured 'Featured Products' %}
+            {% product_list products 'new Products' %}
+            {% product_list search_recs 'Recommended For You' %}
+            {% product_list bestseller 'bestseller' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %} 
+    

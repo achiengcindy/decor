@@ -4,21 +4,19 @@
             {% url 'product_list' as Shop %}
             {% url 'product_list' as Shop %}
         <ul class="menu">
-            <li class="menu-item">
-                    <a href="">Rechel</a>
-            </li>
+           
             <li class="menu-item">
                     <a {% if request.path == 'shop' %}  <a {% if request.path == 'shop' %} class="active" {% endif %} href="{% url 'shop:product_list' %}">Shop</a> {% endif %} href="{% url 'products:product_list' %}">Shop</a>
             </li>
             <li class="menu-item">
-                    <a href="">prisol</a>
+                    <a href="">categories</a>
             </li>
 
             <li class="menu-item">
-                            <a href="">Ox</a>
+                            <a href="">sale</a>
             </li>
             <li class="menu-item">
-            <a href="">Programming</a>
+            <a href="">Search</a>
             </li>
       
         </ul>

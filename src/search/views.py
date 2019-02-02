@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.conf import settings
-import json
-from django.http import HttpResponse
+""" from json import simplejson
 from django.core import serializers
+ """
 from products.models import Product
 from search import search
 
@@ -30,4 +31,6 @@ def results(request):
     
     page_title = 'Search Results for: ' + q
     return render(request,"search/results.html", {})
+
+
 

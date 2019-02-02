@@ -4,7 +4,6 @@
 {% load catalog_filters %}
 {% block content %}
 
-
 <table class="cart">
     <thead>
         <tr>
@@ -23,7 +22,7 @@
             <td class="product-thumbnail">
             <a href="{{ product.get_absolute_url }}"> 
             <img src="{% if product.image %}{{ product.image.url }}
-            {% else %}{% static "img/no_image.png" %}{% endif %}">
+            {% else %}{% static 'img/no_image.png" %}{% endif %}'>
             </a>
             </td>
             <td>{{ product.name }}</td>
