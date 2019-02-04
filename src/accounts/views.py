@@ -43,7 +43,7 @@ def register(request):
             # print(email)
             # email.send()
             user.email_user(subject=subject, message=message)
-            return HttpResponse('Check your Email,tokens sent succesfully')
+            return HttpResponse('Please confirm your email address to complete the registration.')
   
     else:
         user_form = RegistrationForm()

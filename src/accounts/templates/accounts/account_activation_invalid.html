@@ -1,0 +1,14 @@
+{% extends 'products.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row topspace">
+      <div class="signup-form">
+          {% block title %}Email verify invalid!{% endblock title %}
+            <h2>The confirmation link was invalid, possibly because it has already been used.</h2>
+        </div>
+  </div>
+</div>
+
+{% endblock %}
+
