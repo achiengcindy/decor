@@ -63,6 +63,30 @@ def activate(request, uidb64, token, backend='accounts.authentication.EmailAuthB
     else:
         return render(request, 'accounts/account_activation_invalid.html')
 
+@login_required
+def accounts_settings(request):
+    page_title = 'My Account'
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'accounts/settings.html', {'orders':orders})
+
+@login_required
+def accounts_edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user,data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST,files=request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Profile updated successfully')
+            return redirect('/')
+        else:
+            messages.error(request, 'Error updating your profile')
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    return render(request, 'accounts/edit.html', {'user_form': user_form,'profile_form': profile_form})
+   
+
 
  
 
