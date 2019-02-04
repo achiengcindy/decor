@@ -1,0 +1,104 @@
+{% extends "products.html" %}
+{% load products_filters %}
+{% load products_tags %}
+{% load checkout_tags %}
+{% block title %}Payment Options{% endblock %}
+{% block content %}
+<div class="container">
+        <div class="row topspace">
+             
+                <div class="receipt cart-collaterals">
+                                {% if user.is_authenticated %}
+                        <h4><legend> Details for Order {{ order.id }}</legend></h4>
+                        Asante {{ order.owner.username|capfirst }}!
+                        {{ owner.order_set.all }}
+                        <table><tr>
+                                        <th>Created</th>
+                                        <td>{{ order.created }}</td>
+                                        </tr>
+                                        <tr>
+                                        <th>Customer</th>
+                                        <td>{{ order.owner.first_name }} {{order.owner.last_name }}</td>
+                                        </tr>
+                                        <tr>
+                                        <th>E-mail</th>
+                                        <td><a href="mailto:{{ order.email }}">{{ order.owner.email }}</a></td>
+                                        </tr>
+                                        <tr>
+                                        <th>Address</th>
+                                        <td>{{ order.owner.profile.physical_address }}, {{ order.owner.profile.postal_code }}, {{ order.owner.profile.city }}, {{ order.owner.profile.Estate }}</td>
+                                        </tr>
+                
+                                        <tr>
+                                        <th>Status</th>
+                                        <td>{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
+                                        </tr>
+                                        </table>
+                           
+    {% endif %}
+                       
+                        <table>
+                                        <thead>
+                                                        <tr>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th class="right" scope="col">Total</th>
+                                                        </tr>
+
+                                                
+                                        </thead>
+                                
+                                    
+                                        <tbody>
+                                                        {% for item in cart %}
+                                                        <tr>
+                                                        
+                                                        
+                                                        <td>{{ item.product.name }}</td>
+                                                        <td>{{ item.price|currency }}</td> 
+                                                        <td>{{ item.quantity }}</td>
+                                                        <td class="right">{{ item.total_price|currency }}</td>
+
+                                                        
+
+                                                        </tr>
+                                                        {% endfor %}
+                                                        
+                                                                        {% if cart.coupon %}
+                                                                       
+                                                                                <th colspan="3">"{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)</th>
+                                                                                <td class="right"> - {{ cart.get_discount|floatformat:"2"|currency }}</td>
+                                                                        </tr>
+                                                                        <tr><th colspan="3">total</th><td data-title="Total"><strong>{{ cart.get_total_price_after_discount|floatformat:"2"|currency }}</strong></td></tr>
+                                                        
+                                                        
+                                                                        {% endif %}
+
+                                      </tbody>
+                                    </table>
+
+                </div>
+
+                <div class="payment">
+                                <h3>Pay using Mpesa</h3>
+                                <img src="{% static 'images/mpesa.jpg' %}">
+                                <ol>
+                                        <li>Go to M-PESA on your phone.</li>
+                                        <li>Select Lipa na MPESA.</li>
+                                        <li>Enter Paybill Number:******</li>
+                                        <li>Enter Account Number: <b>{{ order.id }}</b> </li>
+                                        <li>Enter the Amount.</li>
+                                        <li>Enter your M-PESA PIN and Send.</li>
+                                        <li>You will receive a confirmation via SMS.</li>
+                                </ol>
+                                <button class="button"><a href="{% url 'payment:lipa' order.pk %}">Pay Now</a></button>
+                        </div>
+
+          
+
+        </div>
+</div>
+
+
+        {% endblock %}
