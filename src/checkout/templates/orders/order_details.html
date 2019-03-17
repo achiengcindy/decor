@@ -1,24 +1,26 @@
 {% extends "products.html" %}
+{% load staticfiles %}
 {% load products_filters %}
 {% load products_tags %}
 {% load checkout_tags %}
 {% block title %}Payment Options{% endblock %}
 {% block content %}
 <div class="container">
-        <div class="row topspace">
-             
-                <div class="receipt cart-collaterals">
-                                {% if user.is_authenticated %}
+        <div class="topspace">
+                    {% if user.is_authenticated %}
                         <h4><legend> Details for Order {{ order.id }}</legend></h4>
                         Asante {{ order.owner.username|capfirst }}!
                         {{ owner.order_set.all }}
-                        <table><tr>
+             
+                <div class="row receipt cart-collaterals">
+                            
+                        <table class="order-details column"><tr>
                                         <th>Created</th>
                                         <td>{{ order.created }}</td>
                                         </tr>
                                         <tr>
                                         <th>Customer</th>
-                                        <td>{{ order.owner.first_name }} {{order.owner.last_name }}</td>
+                                        <td>{{ owner.order.first_name }} {{owner.last_name }}</td>
                                         </tr>
                                         <tr>
                                         <th>E-mail</th>
@@ -37,7 +39,7 @@
                            
     {% endif %}
                        
-                        <table>
+                        <table class="summary column">
                                         <thead>
                                                         <tr>
                                                         <th scope="col">Name</th>
@@ -92,7 +94,7 @@
                                         <li>Enter your M-PESA PIN and Send.</li>
                                         <li>You will receive a confirmation via SMS.</li>
                                 </ol>
-                                <button class="button"><a href="{% url 'payment:lipa' order.pk %}">Pay Now</a></button>
+                                <button class="button"><a href="/">Pay Now</a></button>
                         </div>
 
           

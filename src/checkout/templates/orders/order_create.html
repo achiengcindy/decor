@@ -7,10 +7,38 @@
 <h2>Checkout</h2>
 <div class="container">
     <div class="row topspace">
-        {% if not request.user %}
-        <a href="{% url 'register' %}?next={{ request.path }}">Register New Users</a> 
+        {% if request.user %}
+        <h4>Returning User</h4>
+        <form action="." method="post">
+                {% csrf_token %}
+        <fieldset class="checkout">
+                <legend>Contact Info</legend>
+                <table>
+                                          
+                        {% form_table_row form.owner.email %}
+                        {% form_table_row form.phone %}
+
+                </table>
+        </fieldset>
+        <fieldset class="checkout">
+                <legend>Shipping Info</legend>
+                <table>
+                                {% form_table_row form.physical_address %}
+                                {% form_table_row form.postal_code %}
+                                {% form_table_row form.city %}
+                                {% form_table_row form.Estate %}
+
+                </table>
+        </fieldset>
+        <table>
+                <tr>
+<th colspan="2"><input type="submit" value="Place Order" class="submit" /></th>
+                </tr>
+        </table>
+</form>
         {% else %}
-        <a href="{% url 'login' %}?next={{ request.path }}">Returning User</a>
+        <a href="{% url 'register' %}?next={{ request.path }}">Register New Users</a> 
+       
         {% endif %}
     </div>
 </div>

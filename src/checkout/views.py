@@ -4,11 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import HttpResponse
 from django.urls import reverse #payment
-
-from .models import OrderItem
-from .models import Order
+from .models import OrderItem,Order
 from .forms import CheckoutForm
-#from cart.forms import CartAddProductForm
+from cart.forms import CartAddProductForm
 from cart.cart import Cart
 
 User = get_user_model()
@@ -21,6 +19,9 @@ def order_create(request):
         form = CheckoutForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
+            if cart.coupon:
+                order.coupon = cart.coupon
+                order.discount = cart.coupon.discount
             if request.user.is_authenticated:
                 order.owner = request.user
             order.status = Order.SUBMITTED
@@ -37,17 +38,16 @@ def order_create(request):
             # set the order in the session
             # request.session['order_id'] = order.id
             # redirect to the payment
-            return render(request, 'orders/order/created.html',{"order": order, 'cart': cart,})
+            return render(request, 'orders/order_details.html',{"order": order, 'cart': cart,})
             #return redirect(reverse('orders:order_created',kwargs={"order_id": order.id, 'cart': cart,}))
     else:
         if request.user.is_authenticated:
-            profile = request.owner.profile
+            profile = request.user.profile
             form = CheckoutForm(instance=profile)
         else:
             form = CheckoutForm()
     return render(request, 'orders/order_create.html', {'cart': cart,'form':form})
 
-  
 @login_required
 def order_details(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
