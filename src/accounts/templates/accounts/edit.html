@@ -1,8 +1,8 @@
-{% extends "base.html" %}
-{% load orders_tags %}
+{% extends "products.html" %}
+{% load checkout_tags %}
 {% block title %}Edit your account{% endblock %}
 {% block content %}
-<div class="container">
+<div class="container topspace">
       <h2>Edit Your Details here</h2>
       {% if form.errors %}Something went wrong. Please try again.{% endif %}
 

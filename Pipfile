@@ -7,10 +7,12 @@ verify_ssl = true
 
 [packages]
 django = "*"
-whitenoise = "*"
-python-decouple = "*"
 pillow = "*"
 sorl-thumbnail = "*"
+whitenoise = "*"
+markdown = "*"
+django-taggit = "*"
+python-decouple = "*"
 
 [requires]
 python_version = "3.6"

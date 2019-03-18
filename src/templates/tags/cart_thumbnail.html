@@ -1,0 +1,7 @@
+{% load thumbnail %}
+{% thumbnail product.image "53x53" as im %}
+<a href="{{ product.image.url }}">
+    <img src="{{ im.url }}"  width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}">
+</a>
+{% endthumbnail %}
+

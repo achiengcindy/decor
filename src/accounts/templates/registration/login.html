@@ -8,6 +8,7 @@
         Your username and password didn't match. Please try again.
         {% endif %}
         <form action="{% url 'login' %}" method="post" class="form-signin">
+                {% csrf_token %} 
                 <input type="text" class="form-control" name="username" placeholder="email/username" >
                 <input type="password" class="form-control" name="password" placeholder="Password"> 
                 <input type="hidden" name="next" value="{{ next }}" />     

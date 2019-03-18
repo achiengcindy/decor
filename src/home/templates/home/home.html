@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load search_tags %}
+{% load products_tags %}
+
+
+{% block title %}home{% endblock %}
+
+{% block hero %}{% endblock %}
+
+{% block content %}
+<section class="hero" role = "banner">
+  
+  <span class="desc text-center">
+      <h1>Hello, at decor We are all about Plants</h1>
+      <h2>visit Our<a href="{% url 'products:product_list' %}">Shop</a></h2>
+  </span>
+  
+</section>
+
+<section class="gallery">
+  <h3>Gallery</h3>
+  <div class="masonry">
+      <li class="brick">
+          <a href="/shop/3/monstera-delicios/">
+              <img src="/media/products/main/2019/03/13/IMG_20190312_160255_3.jpg" alt="Monstera Delicios">
+            </a>   
+  </li>
+
+  </div>
+</section>
+
+<!-- <section class="parallax">
+  <div class="parallax__layer parallax__layer--back">
+      <div class="title">This is the background</div>
+    </div>
+  <div class="parallax__layer parallax__layer--base">
+      This is the foreround
+  </div>
+</section>  -->
+       
+
+
+    {% endblock %}

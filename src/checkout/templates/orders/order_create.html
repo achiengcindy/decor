@@ -5,8 +5,7 @@
 
 {% block content %}
 <h2>Checkout</h2>
-<div class="container">
-    <div class="row topspace">
+<div class="container topspace">
         {% if request.user %}
         <h4>Returning User</h4>
         <form action="." method="post">
@@ -40,7 +39,6 @@
         <a href="{% url 'register' %}?next={{ request.path }}">Register New Users</a> 
        
         {% endif %}
-    </div>
 </div>
 {% endblock %}
 

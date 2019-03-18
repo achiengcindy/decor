@@ -9,11 +9,11 @@ def search_box(request):
     form = SearchForm({'q': q })
     return {'form': form }
 
-@register.inclusion_tag('tags/pagination_links.html')
+""" @register.inclusion_tag('tags/pagination_links.html')
 def pagination_links(request, paginator):
     raw_params = request.GET.copy()
-    page = raw_params.get('page',1)
-    p = paginator.page(page)
+    page = raw_params.get_page('page',1)
+    p = paginator.get_page(page)
     try:
         del raw_params['page']
     except KeyError:
@@ -21,5 +21,6 @@ def pagination_links(request, paginator):
     params = urllib.urlencode(raw_params)
     return {'request': request,'paginator': paginator,'p': p,'params': params }
 
+ """
 
-    
+

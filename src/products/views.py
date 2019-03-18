@@ -12,12 +12,13 @@ def product_list(request):
     #default object manager
     #products = Product.objects.filter(is_active=True)
     #customized actve manager
+    new_arrivals = Product.objects.filter(is_new=True)
     products = Product.active.all()
     bestseller = Product.objects.filter(is_bestseller=True)
     featured = Product.featured.all()[0:settings.PRODUCTS_PER_ROW]
     recently_viewed = stats.get_recently_viewed(request)
     view_recs = stats.recommended_from_views(request)
-    return render(request,'product/list.html',{ 'products': products, 'bestseller':bestseller,'featured':featured,'search_recs':search_recs})
+    return render(request,'product/list.html',{ 'products': products, 'bestseller':bestseller,'featured':featured,'search_recs':search_recs,'new':new_arrivals})
 
 
 def list_category(request, slug):
@@ -27,8 +28,6 @@ def list_category(request, slug):
     # meta_keywords = category.meta_keywords
     meta_description = category.meta_description
     return render(request, "product/category.html", {'category':category, 'products':products})
-
-
 
 def product_detail(request, id, slug):
     p = get_object_or_404(Product, id=id,slug=slug)
@@ -41,9 +40,6 @@ def product_detail(request, id, slug):
     return render(request, "product/detail.html", {'c':c, 'p':p, 'cart_product_form': cart_product_form,})
 
 
-    product = get_object_or_404(Product,id=id,slug=slug,available=True)
-    categories = product.categories.filter(is_active=True)
-   
 
 
 

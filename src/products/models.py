@@ -31,7 +31,6 @@ class Category(models.Model):
         return reverse('products:list_category',args=[self.slug])
 
 
-
 class ActiveProductManager(models.Manager):
     def get_query_set(self):
         return super(ActiveProductManager, self).get_query_set().filter(is_active=True)
@@ -51,11 +50,12 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=9,decimal_places=2)
     old_price = models.DecimalField(max_digits=9,decimal_places=2, blank=True,default=0.00)
     # image fields
-    image = models.ImageField(upload_to='images/products/main/%Y/%m/%d',blank=True)
+    image = models.ImageField(upload_to='products/%Y/%m/%d',blank=True)
     image_caption = models.CharField(max_length=200)
     is_active = models.BooleanField(default=True)
     is_bestseller = models.BooleanField(default=False)
     is_featured = models.BooleanField(default=False)
+    is_new = models.BooleanField(default=False)
     available = models.BooleanField(default=True)
     quantity = models.PositiveIntegerField()
     description = models.TextField()

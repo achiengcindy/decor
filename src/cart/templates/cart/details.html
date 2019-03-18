@@ -3,53 +3,64 @@
 {% load products_tags %}
 {% load staticfiles %}
 {% block content %}
-<div class="container">
-    <div class="row topspace">
-            <table class="cart">
-                    <thead>
-                        <tr>
-                            <th class="product-remove">Remove</th>
-                            <th class="product-thumbnail">Image</th>
-                            <th class="product-name">Product</th>
-                            <th class="product-price">Unit Price</th>
-                            <th class="product-quantity">Quantity</th>
-                            <th class="product-subtotal">Total</th>
-                        </tr>
-                    </thead>
-                          <tbody>
-          {% for item in cart %}
-          {% with product=item.product %}
-        <tr class="cart_item">
-            <td data-th="product-remove">
-                <a href="{% url 'cart:cart_remove' product.id %}" class="remove" aria-label="Remove this item" data-product_sku="">×</a></td>
-              <td data-th="product-thumbnail">{% include 'tags/cart_thumbnail.html' %}</td>
-              <td data-th="product-name"><a href=""></a>{{ product.name }}</a></td>
-              <td data-th="product-price">{{ item.price|currency  }}</td>
-              <td data-th="product-quantity" data-title="Quantity">
-                <form class="quantity" action="{% url 'cart:cart_add' product.id %}" method="post">
-                  {% csrf_token %}
-                  {{ item.update_quantity_form.quantity }}
-                  {{ item.update_quantity_form.update }}
-                  <input type="submit" value="Update">
-                </form>
-              </td>
-              <td data-th="product-subtotal" data-title="Total">{{ item.total_price|currency }}</td>
-        </tr>
-        {% endwith %}
-        {% endfor %}
-        <tr>
-          <td colspan="6" data-th='coupon'>
-              <form action="{% url 'coupons:apply' %}" method="post" class="coupon">
-                  {% csrf_token %}
-                  {{ coupon_apply_form.as_p }}
-                  <button type="submit" class="button coupon">Apply Coupon</button>
-              </form>
-          </td> 
-      </tr>   
-      </tbody>
-       </table>    
+<div class="container topspace">
+  <div class="row">
+      <div class="column cart-details  col-lg-8">
+          <h2>Shopping Cart</h2>
 
-      <div class="cart-summary">
+          <table class="cart">
+              <thead>
+                  <tr>
+                      <th class="product-remove"></th>
+                      <th>Image</th>
+                      <th class="product-name">Product</th>
+                      <th class="product-price">Unit Price</th>
+                      <th class="product-quantity">Quantity</th>
+                      <th class="product-subtotal">Total</th>
+                  </tr>
+              </thead>
+                    <tbody>
+    {% for item in cart %}
+    {% with product=item.product %}
+  <tr class="cart_item">
+      <td data-th="product-remove">
+          <a href="{% url 'cart:cart_remove' product.id %}" class="remove" aria-label="Remove this item" data-product_sku="">×</a></td>
+        <td class="product-thumbnail">
+            {% load thumbnail %}
+            {% thumbnail product.image "53" as im %}
+            <a href="{{  product.image.url  }}">
+            <img src="{{ im.url }}" alt="{{ product.name }}" class="image-detail">
+            </a>
+            {% endthumbnail %}
+        </td>
+        <td data-th="product-name"><a href=""></a>{{ product.name }}</a></td>
+        <td data-th="product-price">{{ item.price|currency  }}</td>
+        <td data-th="product-quantity" data-title="Quantity">
+          <form class="quantity" action="{% url 'cart:cart_add' product.id %}" method="post">
+            {% csrf_token %}
+            {{ item.update_quantity_form.quantity }}
+            {{ item.update_quantity_form.update }}
+            <input type="submit" value="Update">
+          </form>
+        </td>
+        <td data-th="product-subtotal" data-title="Total">{{ item.total_price|currency }}</td>
+  </tr>
+  {% endwith %}
+  {% endfor %}
+  <tr>
+    <td colspan="6" data-th='coupon'>
+        <form action="{% url 'coupons:apply' %}" method="post" class="coupon">
+            {% csrf_token %}
+            {{ coupon_apply_form.as_p }}
+            <button type="submit" class="button coupon">Apply Coupon</button>
+        </form>
+    </td> 
+</tr>   
+</tbody>
+ </table> 
+
+      </div>
+      <div class="cart-summary column  col-lg-4">
             <h2>Cart totals</h2>
             <table class="cart-collaterals">
                   <tbody>
@@ -74,13 +85,12 @@
               <button class="button shopping"><a href="{% url 'products:product_list' %}">Continue shopping</a></button>
               <button class="proceed-to-checkout"><a href="{% url 'orders:order_create' %}" class="button checkout-button">Proceed to Checkout</a></button>
       </div>
-    </div>
+  </div>
 </div><!--.container-->
 
 
 
 
+{% endblock %}
 
 
-
-            {% endblock %}

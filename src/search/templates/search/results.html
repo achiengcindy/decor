@@ -1,11 +1,12 @@
 {% extends "products.html" %}
 {% load search_tags %}
 {% block content %}
-<h1>Search Results for: '{{ q }}'</h1>
+<h3>Search Results for: {{ q }}</h3>
 {% for p in results %}
 {% include 'tags/product_thumbnail.html' %}
 {% empty %}
+there is nothing to show
 {% endfor %}
+
 <div class="cb">&nbsp;</div>
-{% pagination_links request paginator %}
 {% endblock %}

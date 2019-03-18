@@ -6,10 +6,10 @@ register = template.Library()
 @register.filter(name='currency')
 def currency(value):
     try:
-        locale.setlocale(locale.LC_ALL,'om_KE.utf8')
+        locale.setlocale(locale.LC_ALL,'om_KE.UTF-8')
     except:
         locale.setlocale(locale.LC_ALL,'')
-    value =Decimal(value)
+    value = Decimal(value)
     loc = locale.localeconv()
     return locale.currency(value, loc['currency_symbol'], grouping=True)
 

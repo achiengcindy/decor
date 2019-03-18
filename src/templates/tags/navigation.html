@@ -2,25 +2,18 @@
 <div class="nav-wrapper">
     <nav class="main-menu ">
             {% url 'product_list' as Shop %}
-            {% url 'product_list' as Shop %}
+          
         <ul class="menu">
            
             <li class="menu-item">
-                    <a {% if request.path == 'shop' %}  <a {% if request.path == 'shop' %} class="active" {% endif %} href="{% url 'shop:product_list' %}">Shop</a> {% endif %} href="{% url 'products:product_list' %}">Shop</a>
-            </li>
-            <li class="menu-item">
-                    <a href="">categories</a>
+                    <a {% if request.path == 'shop' %}   class="active" {% endif %} href="{% url 'products:product_list' %}">Shop</a> 
             </li>
 
-            <li class="menu-item">
-                            <a href="">sale</a>
-            </li>
-            <li class="menu-item">
-            <a href="">Search</a>
-            </li>
       
         </ul>
     </nav>
     <a href="#header-search-form-mobile" class="icon-search-mobile action-open-search search-trigger">Search</a>
     <button for="show-menu-mobile" class="btn-menu-mobile action-menu-mobile">Menu</button>
 </div>
+
+

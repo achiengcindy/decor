@@ -66,7 +66,7 @@ def activate(request, uidb64, token, backend='accounts.authentication.EmailAuthB
 @login_required
 def accounts_settings(request):
     page_title = 'My Account'
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(owner=request.user)
     return render(request, 'accounts/settings.html', {'orders':orders})
 
 @login_required
