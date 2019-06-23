@@ -1,24 +1,33 @@
-
 {% load products_filters %}
 {% for product in products %}
-{% if forloop.first %}
-<h3 class='product_list'>{{ header_text }}</h3>
-{% endif %}
+<li class=" product column column col-2 col-3 col-lg-4 mt mb">
+  <div class="post-thumbnail">
+    {% include "tags/list_thumbnail.html" %}
+  </a>
+  <div class="post-overlay">
+    <a href="" data-quantity="1"class="button product_type_simple add_to_cart_button ajax_add_to_cart" data-product_id="1146"
+      data-product_sku="123-10" aria-label="Add “&quot;Design Trends 2019&quot; Catalog” to your cart"
+      rel="nofollow">Add to cart</a>
+  </div>
+  <!-- {% if forloop.last %}
+  {% endif %} -->
+</div>
 
-<li class="brick">
-    
-        <a href="{{ product.get_absolute_url }}">
-       
-            <img src="{{ product.image.url }}" class="card-image" alt="{{ product.name }}">
-        </a>
-        {% if forloop.last %}	
-            {% endif %}
-        <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
-        <del class="previous-price"></del>
-        <p class="price">{{ product.price }}</p>
+
+
+<a href="{{ product.get_absolute_url }}" class="product__link">
+  <h2 class="product__title">{{ product.name }}</h2>
+  <span class="price">{{ product.price }}
+    <del class="previous-price">{{ product.price }}</del>
+  </span>
+</br>
+  <div class="star-rating">
+    <span style="width:100%">Rated <strong class="rating">5.00</strong> out of 5</span>
+  </div>
+  <span class="star-rating-count">(1)</span>
+  <div class="wishlist" href="#login-register" data-status="add">
+    <i class="icon icon-heart"></i>
+  </div>
+</a>
 </li>
 {% endfor %}
-
-
-
-

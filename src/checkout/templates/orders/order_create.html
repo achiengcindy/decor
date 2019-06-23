@@ -1,45 +1,71 @@
-{% extends "products.html" %}
+{% extends "base.html" %}
 {% load checkout_tags %}
 {% block title %}Checkout{% endblock %}
 
 
 {% block content %}
 <h2>Checkout</h2>
-<div class="container topspace">
-        {% if request.user %}
-        <h4>Returning User</h4>
-        <form action="." method="post">
-                {% csrf_token %}
-        <fieldset class="checkout">
-                <legend>Contact Info</legend>
-                <table>
-                                          
-                        {% form_table_row form.owner.email %}
-                        {% form_table_row form.phone %}
+<div class="container topspace inner-items">
+        <!-- Tab links -->
+        <div class="tab">
+                <button class="tablinks" onclick="userAction(event, 'Return')">Returning User</button>
+                <button class="tablinks" onclick="userAction(event, 'New')">New User</button>
+        </div>
+        <!-- Tab content -->
+        {% if request.user.is_authenticated %}
+        <div id="Return" class="tabcontent">
+                <h3>Returning User</h3>
+                <form action="." method="post">
+                                {% csrf_token %}
+                                <fieldset class="checkout">
+                                        <legend>Contact Info</legend>
+                                        <table>
+                                                
+                        
+                                                {% form_table_row form.owner.email %}
+                                                {% form_table_row form.phone %}
+                        
+                                        </table>
+                                </fieldset>
+                                <fieldset class="checkout">
+                                        <legend>Shipping Info</legend>
+                                        <table>
+                                                {% form_table_row form.physical_address %}
+                                                {% form_table_row form.postal_code %}
+                                                {% form_table_row form.city %}
+                                                {% form_table_row form.Estate %}
+                        
+                                        </table>
+                                </fieldset>
+                                <table>
+                                        <tr>
+                                                <th colspan="2"><input type="submit" value="Place Order" class="submit" /></th>
+                                        </tr>
+                                </table>
+                        </form>
+        </div>
 
-                </table>
-        </fieldset>
-        <fieldset class="checkout">
-                <legend>Shipping Info</legend>
-                <table>
-                                {% form_table_row form.physical_address %}
-                                {% form_table_row form.postal_code %}
-                                {% form_table_row form.city %}
-                                {% form_table_row form.Estate %}
-
-                </table>
-        </fieldset>
-        <table>
-                <tr>
-<th colspan="2"><input type="submit" value="Place Order" class="submit" /></th>
-                </tr>
-        </table>
-</form>
-        {% else %}
-        <a href="{% url 'register' %}?next={{ request.path }}">Register New Users</a> 
+{% endif %}
        
-        {% endif %}
+        <div id="New" class="tabcontent">
+                        <form action="." method="post" class="order-form">
+                                        {% csrf_token %}
+                                <table>
+                                                {% form_table_row form.owner.first_name %}
+                                                {% form_table_row form.owner.last_name %}
+                                                {% form_table_row form.owner.email %}
+                                                {% form_table_row form.phone %}
+                                                {% form_table_row form.physical_address %}
+                                                {% form_table_row form.postal_code %}
+                                                {% form_table_row form.city %}
+                                                {% form_table_row form.Estate %}
+                                                <!-- {{ form.as_p }} -->
+
+                                </table>
+                                        
+                                        <p><input type="submit" value="Place order"></p>
+                                        
+                                        </form>
+
 </div>
 {% endblock %}
-
-

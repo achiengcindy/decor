@@ -1,19 +1,73 @@
+{% load staticfiles %}
 
-<div class="nav-wrapper">
-    <nav class="main-menu ">
-            {% url 'product_list' as Shop %}
+<header id="main-header" role="banner">
+    <div class="wrapper">
+        <div class="header__menu">
+            <a class="header__logo" href="/">
+                <img src="{% static 'images/logonobackgroundgray-70w.webp' %}"
+                    srcset="{% static 'images/logonobackgroundgray-70w.png' %}" alt="site logo" class="basket" />
+            </a>
+                <div id="menu" onclick="myFunction(this)" role="button">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
           
-        <ul class="menu">
-           
-            <li class="menu-item">
-                    <a {% if request.path == 'shop' %}   class="active" {% endif %} href="{% url 'products:product_list' %}">Shop</a> 
+        </div>      
+        <nav id="drawer" class="nav main__nav" role="navigation">
+            <ul class="menu-list">
+                {% url 'product_list' as Shop %}
+                <li class="menu-item">
+                    <a {% if request.path == 'shop' %} class="active" {% endif %} href="{% url 'products:product_list' %}">Shop</a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'accounts_settings'  %}">My Account</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Contact</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Blog</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">Categories</a>
+                </li>
+            </ul>
+
+        
+        </nav>
+        <!-- <button class="btn-menu-mobile" style="display: none;">Menu</button> -->
+
+        <ul class="header-icons">
+            <li class="header-account dis-block">
+                {% if user.is_authenticated %}
+                hello {{ request.user}}
+                {% else %}
+                <img src="{% static 'images/iconfinder_profile.svg' %}" class="basket">
+                {% endif %}
+                <ul class="dropdown">
+                    {% if user.is_authenticated %}
+                    <li><a href=" {% url 'accounts_settings'  %}">settings</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login'  %}">login</a></li>
+                    <li><a href="{% url 'register'  %}">signup</a></li>
+                    {% endif %}
+                </ul>
             </li>
-
-      
+            <li class="cart-header dis-block">
+                <img src="{% static 'images/iconfinder_meanicons.svg' %}" class="basket">
+                {% with total_items=cart|length %}
+                <span id="checkout_items" class="checkout_items">
+                    {% if cart|length > 0 %}
+                    <a href="{% url 'cart:cart_detail' %}">{{ total_items }}</a>
+                    {% else %} 0{% endif %}
+                </span>
+                {% endwith %}
+                <ul class="dropdown">
+                    <li><a href="">cart amount</a></li>
+                    <li><a href="">cart</a></li>
+                </ul>
+            </li>
         </ul>
-    </nav>
-    <a href="#header-search-form-mobile" class="icon-search-mobile action-open-search search-trigger">Search</a>
-    <button for="show-menu-mobile" class="btn-menu-mobile action-menu-mobile">Menu</button>
-</div>
-
-
+    </div>
+</header>

@@ -1,14 +1,29 @@
-{% extends "products.html" %}
+{% extends "base.html" %}
+{% load products_tags %}
+{% load search_tags %}
+{% load products_filters %}
+
+{% block title %}Category{% endblock %}
 {% block content %}
-<h1>{{ category.name }}</h1>
-{{ category.description }}
-<br /><br />
-{% for p in products %}
-<div class="product_thumbnail">
-        {% include 'tags/product_thumbnail.html' %}
-{{ p.name }}
 
-</div>
-{% endfor %}
-{% endblock %}
+<div class="container topspace inner-items">
+        <div class="row">
+                <aside>
+                        {% search_box request %}
+                        </br>
+                        <!-- {% include 'tags/category_list.html' %} -->
+                        {% category_list request.path %}
 
+                </aside>
+                <div class="products-list">
+                        <h3 class="mb">{{ category.name }}</h3>
+                        {{ category.description }}
+
+                        {% for p in products %}
+                        <!-- include images -->
+                        {{ p.name }}
+
+                        {% endfor %}
+                </div>
+        </div>
+        {% endblock %}

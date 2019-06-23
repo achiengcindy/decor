@@ -24,21 +24,18 @@ def product_list(request):
 def list_category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = category.product_set.all()
-    page_title = category.name
-    # meta_keywords = category.meta_keywords
+    print(products)
     meta_description = category.meta_description
     return render(request, "product/category.html", {'category':category, 'products':products})
 
+
 def product_detail(request, id, slug):
-    p = get_object_or_404(Product, id=id,slug=slug)
+    p = get_object_or_404(Product, id=id, slug=slug)
     c = p.categories.filter(is_active=True)
     cart_product_form = CartAddProductForm()
-    page_title = p.name
-    meta_keywords = p.meta_keywords
     meta_description = p.meta_description
     stats.log_product_view(request, p)
     return render(request, "product/detail.html", {'c':c, 'p':p, 'cart_product_form': cart_product_form,})
-
 
 
 

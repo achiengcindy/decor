@@ -30,7 +30,7 @@ def register(request):
             #send one time activation email
             current_site = get_current_site(request)
             subject = 'Account Confirmation'
-            sender = settings.DEFAULT_FROM_EMAIL
+            # sender = settings.DEFAULT_FROM_EMAIL
             message = render_to_string('accounts/account_activation_email.html', {
                 'user':  user,
                 'domain': current_site.domain,

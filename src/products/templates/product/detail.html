@@ -1,79 +1,124 @@
-{% extends "products.html" %}
+{% extends "base.html" %}
+{% block title %}{{ p.name }}{% endblock %}
 {% block content %}
-<div class="container topspace">
-            <ul class="breadcrumbs">
-                    <li class="breadcrumb ">
-                        <a href="" class="breadcrumb-label link">
-                          <span>Home</span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb ">
-                        <a href="" class="breadcrumb-label link">
-                          <span>Mens</span>
-                        </a>
-                    </li>
-                    <li class="breadcrumb is-active">
-                        <a href="" class="breadcrumb-label link">
-                          <span>Wind Jacket - Orange</span>
-                        </a>
-                    </li>
-                </ul><!--.breadcrumbs-->
-</div>
-<div class="container product-details">
-    <div class="row topspace">
-    <div class="product_image column">
-            {% load thumbnail %}
-            {% thumbnail p.image "720" as im %}
-            <a href="{{  p.image.url  }}">
-            <img src="{{ im.url }}" alt="{{ p.name }}" class="image-detail">
+<div class="container topspace inner-items">
+    <ul class="row breadcrumbs mb">
+        <li class="breadcrumb ">
+            <a href="/" class="breadcrumb-label link">
+                <span>Home</span>
             </a>
-            {% endthumbnail %}
+        </li>
+        <li class="breadcrumb ">
+            <a href="{{ p.get_absolute_url }}" class="breadcrumb-label link">
+                <span>{{ p.name }}</span>
+            </a>
+        </li>
+    </ul>
+    <!--.breadcrumbs-->
+    <div class="row mb">
+        <div class="product_image">
+            {% include "tags/details_thumbnail.html" %}
         </div>
-    <div class="product_description column" >
-        <h1 class="product_title">{{ p.name }}</h1>
-        <p class="price">
+        <div class="product_description">
+            <h3 class="product_title">{{ p.name }}</h3>
+            <!-- <div class="woocommerce-product-rating" itemprop="aggregateRating" itemscope=""
+                itemtype="http://schema.org/AggregateRating">
+                <div class="star-rating" title="Rated 4.5 out of 5">
+                    <span style="width:90%">
+                        <strong itemprop="ratingValue" class="rating">4.5</strong> out of <span itemprop="bestRating">5</span> based
+                        on <span itemprop="ratingCount" class="rating">2</span> customer ratings </span>
+                </div>
+                <a href="#reviews" class="reviews" rel="nofollow">(<span itemprop="reviewCount" class="count">2</span> customer
+                    reviews)</a>
+            </div> -->
+            <p class="price">
                 {% if p.sale_price %}
-            <del>{{ p.old_price }}</del> 
-            <span class="currencySymbol">{{ p.price }}</span>
-            {% else %}
-            <span class="currencySymbol">{{ p.price }}</span>
-            {% endif %}
-        </p>
-        Brand: <em>{{ p.brand }}</em>
-    </br>
-        SKU: {{ p.sku }}
-    
-                <h3>Product Description</h3>
-                {{ p.description }}
-    
-        
-
-        <form action="{% url 'cart:cart_add' p.id %}" method="post">
-                {{ cart_product_form.as_p }}
+                <del>{{ p.old_price }}</del>
+                <span class="currencySymbol">{{ p.price }}</span>
+                {% else %}
+                <span class="currencySymbol">{{ p.price }}</span>
+                {% endif %}
+            </p>
+            <div class="product-description mb"> {{ p.description }}</div>
+            <p class="stock in-stock">25 in stock</p>
+            <form action="{% url 'cart:cart_add' p.id %}" method="post" class="mb">
+                <!-- {{ cart_product_form.as_p }} -->
+                {{ cart_product_form }}
                 {% csrf_token %}
-                <button class="cart">Add to cart</button>
+                <button class="cart" type="submit">Add to cart</button>
             </form>
-        <span class="product_meta">
-                In categor{{ categories.count|pluralize:"y,ies" }}:
-                {% for category in c %}
-                <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
-                {% if not forloop.last %}, {% endif %}
-                {% endfor %}
-        </span>
-        
-       
-        {% endblock %}
-    </div> 
-</div><!--.row-->       
-</div><!--.container-->
+            <div class="product_meta mb mt">
+                <h5 class="product-meta-title">Info</h5>
+                <span class="sku_wrapper">
+                    <span class="info-meta-title">SKU:</span>
+                    <span class="sku" itemprop="sku">012</span>
+                </span>
+                <span class="brands">
+                    <span class="info-meta-title">Brand:</span>
+                    <span class="info-meta-content">{{ p.brand }}</span>
+                    <!-- <em>{{ p.brand }}</em> -->
+                </span>
+                <span class="posted_in">
+                    <span class="info-meta-title"> In categor{{ categories.count|pluralize:"y,ies" }}:</span>
+                    <span class="info-meta-content">
+                        {% for category in c %}
+                        <a href="{{ category.get_absolute_url }}" rel="tag">{{ category.name }}</a>
+                        {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </span>
+                </span>
+                <span class="tagged_as">
+                    <span class="info-meta-title">Tags:</span>
+                    <span class="info-meta-content">
+                        <a href="https://vangard.edge-themes.com/product-tag/black/" rel="tag">Black</a>
+                        <span class="product-meta-separator">, </span>
+                        <a href="https://vangard.edge-themes.com/product-tag/casual/" rel="tag">Casual</a>
+                    </span>
+                </span>
+            </div>
 
-<div class="container product-details">
-    <div class="row topspace">
-        what is going on? what is going on?what is going on?what is going on?what is going on?
+            <div class="social-share-holder">
+                <span class="social-share-title">Share</span>
+                <ul>
+                    <li class="facebook-share">
+                        <a class="share-link" href="#"
+                            onclick="window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]=Military+big&amp;p[url]=https%3A%2F%2Fvangard.edge-themes.com%2Fproduct%2Fmilitary-big%2F&amp;p[images][0]=https://vangard.edge-themes.com/wp-content/uploads/2016/09/product-image-6.jpg&amp;p[summary]=Mea+facilisis+urbanitas+moderatius+id.+Alienum+phaedrum+torquatos+nec+eu%2C+vis+detraxit+periculis+ex%2C+nihil+error+expetendis+in+mei.+Mei+an+pericula+euripidis%2C+hinc+an+partem+ei+est.+Eos+ei+nisl+graecis%2C+vix+aperiri+consequat+an.+Tied+an+hinc+pericula+euripidis%2C+hinc+partem+ei+est.+Eos+ei+nisl+graecis%2C+vix+aperiri+consequat+an.', 'sharer', 'toolbar=0,status=0,width=620,height=280');">
+                            <span class="social-network-icon social_facebook"></span>
+                        </a>
+                    </li>
+                    <li class="twitter-share">
+                        <a class="share-link" href="#"
+                            onclick="window.open('http://twitter.com/home?status=Mea+facilisis+urbanitas+moderatius+id.+Alienum+phaedrum+torquatos+nec+eu%2C+vis+detraxit+periculis+ex%2C+nihil+error+https://vangard.edge-themes.com/product/military-big/', 'popupwindow', 'scrollbars=yes,width=800,height=400');">
+                            <span class="social-network-icon social_twitter"></span>
+                        </a>
+                    </li>
+                    <li class="linkedin-share">
+                        <a class="share-link" href="#"
+                            onclick="popUp=window.open('http://linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fvangard.edge-themes.com%2Fproduct%2Fmilitary-big%2F&amp;title=Military+big', 'popupwindow', 'scrollbars=yes,width=800,height=400');popUp.focus();return false;">
+                            <span class="social-network-icon social_linkedin"></span>
+                        </a>
+                    </li>
+                    <li class="pinterest-share">
+                        <a class="share-link" href="#"
+                            onclick="popUp=window.open('http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fvangard.edge-themes.com%2Fproduct%2Fmilitary-big%2F&amp;description=Military big&amp;media=https%3A%2F%2Fvangard.edge-themes.com%2Fwp-content%2Fuploads%2F2016%2F09%2Fproduct-image-6.jpg', 'popupwindow', 'scrollbars=yes,width=800,height=400');popUp.focus();return false;">
+                            <span class="social-network-icon social_pinterest"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--.row-->
+    <div class="row related_products mt pt pb">
+        <h3>Related Products</h3>
+        <div class="">
+            {% for p in p.cross_sells_hybrid %}
+            {% include 'tags/cart_thumbnail.html' %}
+            {% empty %}
+            No related products.
+            {% endfor %}
+        </div>
     </div>
 </div>
-
-
-
-
-
+<!--.container-->
+{% endblock %}

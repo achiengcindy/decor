@@ -13,3 +13,4 @@ def currency(value):
     loc = locale.localeconv()
     return locale.currency(value, loc['currency_symbol'], grouping=True)
 
+

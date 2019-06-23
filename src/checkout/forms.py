@@ -9,8 +9,11 @@ class CheckoutForm(forms.ModelForm):
 
         def clean_phone(self):
             phone = self.cleaned_data['phone']
-            if len(phone) < 10:
+            stripped_phone = strip_non_numbers(phone)
+            if len(stripped_phone) < 10:
                 raise forms.ValidationError('Enter a valid phone number.(e.g.07********)')
             return self.cleaned_data['phone']
+
+
 
 

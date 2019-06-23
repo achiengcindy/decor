@@ -1,21 +1,61 @@
-{% extends "products.html" %}
+{% extends "base.html" %}
 {% load products_tags %}
 {% load search_tags %}
 {% load products_filters %}
+{% block title %}Products{% endblock %}
 {% block content %}
 
-<h1>Welcome to Decor pot shop!</h1>
-<div class="topspace masonry">
-                    {% product_list recently_viewed 'Your Recently Viewed' %}
-                    {% product_list view_recs 'Similar Products' %}
-                    {% product_list featured 'Featured Products' %}
-                    {% product_list products 'new' %}
-                    {% product_list bestseller 'bestseller' %}
-           
-      
-</div>
-{% endblock %} 
-    
 
-              
-     
+<div class="container topspace">
+        <aside class="product_catalog">
+                <div class="side mb">
+                        {% search_box request %}
+                        </br>
+                </div>
+                <div class="side mb">
+                        <!-- {% include 'tags/category_list.html' %} -->
+                        {% category_list request.path %}
+
+                </div>
+                <div class="side mb">
+                        <h3>Brands</h3>
+
+                </div>
+                <div class="side mb">
+                        <h3>Price range</h3>
+
+                </div>
+                <div class="side mb">
+                        <h3>color</h3>
+
+                </div>
+        </aside>
+        <div class="products-list">
+                <p class="result-count">
+                        whatsup tess
+                </p>
+
+                <form class="product-form" method="get">
+                        <select>
+                        <option value="order" selected="selected">Default sorting</option>
+                        <option value="featuired">Sort by Featured</option>
+                        <option value="rating">Sort by average rating</option>
+                        <option value="date">Sort by latest</option>
+                        <option value="price">Sort by price: low to high</option>
+                        <option value="price-desc">Sort by price: high to low</option>
+                        </select> 
+                        <input type="hidden" name="paged" value="1">
+                </form>
+                <ul class="products row mt mb">
+                        {% product_list featured 'Featured' %}
+                        {% product_list products 'New' %}
+                        {% product_list bestseller 'Bestseller' %}
+                        {% product_list recently_viewed 'Your Recently Viewed' %}
+                        {% product_list view_recs 'Similar Products' %}
+                </ul>
+        </div>
+</div>
+
+
+
+{% endblock %}

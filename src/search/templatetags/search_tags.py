@@ -1,26 +1,26 @@
 from django import template
 from ..forms import SearchForm
 import urllib
+from django.core.paginator import Paginator
 
 register = template.Library()
 @register.inclusion_tag("tags/search_box.html")
 def search_box(request):
-    q = request.GET.get('q','')
-    form = SearchForm({'q': q })
-    return {'form': form }
+    q = request.GET.get('q', '')
+    form = SearchForm({'q': q})
+    return {'form': form}
 
-""" @register.inclusion_tag('tags/pagination_links.html')
+
+@register.inclusion_tag('tags/pagination_links.html')
 def pagination_links(request, paginator):
     raw_params = request.GET.copy()
-    page = raw_params.get_page('page',1)
-    p = paginator.get_page(page)
+    page = raw_params.get_page('page', 1)
+    p = paginator(page)
     try:
         del raw_params['page']
     except KeyError:
         pass
     params = urllib.urlencode(raw_params)
-    return {'request': request,'paginator': paginator,'p': p,'params': params }
-
- """
+    return {'request': request, 'paginator': paginator, 'p': p, 'params': params}
 
 

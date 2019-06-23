@@ -1,99 +1,54 @@
 {% load staticfiles %}
 {% load products_tags %}
+{% load staticfiles %}
+{% load search_tags %}
+{% load products_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    {% include 'tags/metatags.html' %}
-    <title>{% block title %}{% if page_title %}{{ page_title }} - {% endif %}
-        {{ site_name }}{% endblock %}</title>
-
-    <link rel="SHORTCUT ICON" href="{% static 'images/favicon.ico' %}"/>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        {% include 'tags/metatags.html' %}
+        <title>{% block title %} {% endblock %}-{{ site_name }}</title>
+        <link rel="SHORTCUT ICON" href="{% static 'images/favicon.ico' %}" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
+
 <body>
-       
-        <header id="main-header" role="banner">
-        <a class="header__logo" href="/">Decor<span style="color: yellowgreen;">Online</span></a></a>
-        <a id="menu" class="header__menu" style="display: none;">
-            <img src="{% static 'images/iconfinder_menu.svg' %}" class="basket">
-        </a>
-        
-    <div id="drawer" class="nav-wrapper">
-    <nav class="main__nav" role="navigation">
-        <ul class="menu-list">
-                {% url 'product_list' as Shop %}
-                
-          
-            <li class="menu-item">
-                <a {% if request.path == 'shop' %} class="active" {% endif %} href="{% url 'products:product_list' %}">Shop</a>
-            </li>
-            <li class="menu-item">
-                <a href="{% url 'accounts_settings'  %}">My Account</a>
-            </li>
-        </ul>
-    </nav>
-    <!-- <button class="btn-menu-mobile" style="display: none;">Menu</button> -->
-</div>
-<div class="header-icons">
-    <ul>
-        <li>
-               
-                {% if user.is_authenticated %}
-                hello {{ request.user}}
-                {% else %}
-         <img src="{% static 'images/iconfinder_profile.svg' %}" class="basket">
-         {% endif %}
-         <ul class="dropdown">
-             {% if user.is_authenticated %}
-             <li class="menu-item"><a href=" {% url 'accounts_settings'  %}">settings</a></li>
-             {% else %}
-             <li class="menu-item"><a href="">login</a></li>
-             <li class="menu-item"><a href="">signup</a></li>
-             {% endif %}
-             
-         </ul>
-        </li>
-        <li class="cart-header">
-            <img src="{% static 'images/iconfinder_meanicons.svg' %}" class="basket">
-             {% with total_items=cart|length %}
-             <span id="checkout_items" class="checkout_items">
-                    {% if cart|length > 0 %}
-                    <a href="{% url 'cart:cart_detail' %}">{{ total_items }}</a>
-                    {% else %} 0{% endif %}
-            </span> 
-             {% endwith %}
-             <ul class="dropdown">
-                <li><a href="">cart amount</a></li>
-                <li><a href="">cart</a></li> 
-            </ul>
+        <main id="main">
+                {% include "tags/navigation.html" %}
+                {% block hero %}{% endblock %}
+                {% block content %}{% endblock %}
+        </main>
 
-        </li>
-    </ul>
- </div>
-<!-- {% include 'tags/navigation.html' %} -->
-  
-</header>
-    <main id="main">
-            {% block hero %}{% endblock %}
-            
-            {% block content %}{% endblock %}
 
-    </main>
-    <footer id="footer">
-            {% footer_links %}
-    </footer>
-</div>
+        <footer id="footer">
+                {% footer_links %}
+        </footer>
+        </div>
 
-        <script src="{% static 'js/main.js' %}"></script> 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+                </script>
+        <!-- <script>
+                var csrftoken = Cookies.get('csrftoken');
+                function csrfSafeMethod(method) {
+                        // these HTTP methods do not require CSRF protection
+                        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+                }
+                $.ajaxSetup({
+                        beforeSend: function (xhr, settings) {
+                                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                                }
+                        }
+                });
+                $(document).ready(function () {
+                        {% block domready %}
+                        {% endblock %}
+                });
+        </script> -->
 </body>
+
 </html>
-
-
-
-
-
-
-
- 
-

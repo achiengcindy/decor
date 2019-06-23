@@ -1,9 +1,14 @@
+{% load staticfiles %}
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="{{ meta_keywords }}">
-<meta property="og:title" content="{{meta_title}}">
+<meta property="og:site_name" content="{{ site_name }}" />
+<meta property="og:url" content='https://decor.co.ke{{meta_url|default:"/"}}'>
 <meta property="og:description" content="{{ meta_description }}">
+<meta property="og:image" content='https://achiengcindy.com{{meta_image|default:"/src/media_cdn/djangowhite.png"}}'>
+<meta property="og:type" content="website">
+
 
 
 

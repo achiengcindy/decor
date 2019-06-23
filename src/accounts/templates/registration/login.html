@@ -1,8 +1,8 @@
-{% extends "products.html" %}
+{% extends "base.html" %}
 {% block title %}Log-in{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row topspace">
+<div class="container topspace">
+    <div class="row">
         <h2>Please login</h2>
         {% if form.errors %}
         Your username and password didn't match. Please try again.

@@ -1,0 +1,24 @@
+{
+  "name": "decor",
+  "version": "1.0.0",
+  "description": "an online shop for selling interior decor items",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achiengcindy/decor.git"
+  },
+  "keywords": [
+    "decor",
+    "flowers",
+    "interior"
+  ],
+  "author": "cindy Achiengg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/achiengcindy/decor/issues"
+  },
+  "homepage": "https://github.com/achiengcindy/decor#readme"
+}
