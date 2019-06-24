@@ -18,7 +18,7 @@
 <a href="{{ product.get_absolute_url }}" class="product__link">
   <h2 class="product__title">{{ product.name }}</h2>
   <span class="price">{{ product.price }}
-    <del class="previous-price">{{ product.price }}</del>
+    <del class="previous-price">{{ product.old_price }}</del>
   </span>
 </br>
   <div class="star-rating">
