@@ -59,7 +59,7 @@
                     <!-- <em>{{ p.brand }}</em> -->
                 </span>
                 <span class="posted_in">
-                    <span class="info-meta-title"> In categor{{ categories.count|pluralize:"y,ies" }}:</span>
+                    <span class="info-meta-title"> categor{{ c.count|pluralize:"y,ies" }}:</span>
                     <span class="info-meta-content">
                         {% for category in c %}
                         <a href="{{ category.get_absolute_url }}" rel="tag">{{ category.name }}</a>

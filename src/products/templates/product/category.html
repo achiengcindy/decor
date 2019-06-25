@@ -21,9 +21,29 @@
 
                         {% for p in products %}
                         <!-- include images -->
-                        {{ p.name }}
+                        <a href="{{ p.get_absolute_url }}">
+                                {% include "tags/cart_thumbnail.html" %}
+                                {{ p.name }}
+                        </a>
+                       
+                  
 
                         {% endfor %}
                 </div>
         </div>
         {% endblock %}
+
+
+<!-- 
+        make sure the href is inline-styled
+        {% for p in products %}
+<div class="product_thumbnail">
+<a href="{{ p.get_absolute_url }}">
+<img src="{{ MEDIA_URL }}images/products/thumbnails/{{ p.image
+}}" 
+alt="{{ p.name }}" class="bn" />
+<br />
+{{ p.name }}
+</a>
+</div>
+{% endfor %} -->

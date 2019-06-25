@@ -1,13 +1,4 @@
-
 {% load thumbnail %}
-{% thumbnail product.image "300x300" as im %}
+{% thumbnail products.image "300x300" as im %}
 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.image }}">
 {% endthumbnail %}
-
-
-
-
-
-
-
-
